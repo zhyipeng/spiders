@@ -1,0 +1,8 @@
+.idea
+__pycache__
+*.pyc
+.qiniu_pythonsdk_hostscache.json
+output
+.env
+venv
+.vscode
