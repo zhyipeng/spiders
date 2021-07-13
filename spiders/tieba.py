@@ -19,7 +19,7 @@ async def parse_content(content: str) -> tuple[str, str]:
     if title:
         title = title.text
 
-    return '\n***\n'.join(map(str, posts)), title or ''
+    return '\n***\n'.join(map(lambda x: x.prettify(), posts)), title or ''
 
 
 async def run(url: str, path: Path):
