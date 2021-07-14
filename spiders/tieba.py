@@ -15,9 +15,11 @@ async def parse_content(content: str) -> tuple[str, str]:
     posts = soup.find_all('div', class_='j_d_post_content')
     await handle_images(posts)
 
-    title = soup.find('h1', class_='core_title_txt')
+    title = soup.find('h3', class_='core_title_txt')
+    if not title:
+        title = soup.find('h1', class_='core_title_txt')
     if title:
-        title = title.text
+        title = title.text.strip()
 
     return '\n***\n'.join(map(lambda x: x.prettify(), posts)), title or ''
 
