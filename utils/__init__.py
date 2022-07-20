@@ -1,13 +1,12 @@
 import asyncio
+import datetime
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+from urllib.parse import parse_qsl, urlencode, urlunparse
+from urllib.parse import urlparse
 
 import aiofiles
 import aiohttp
 from bs4 import Tag
-from zhtools.random import short_uuid
-from urllib.parse import urlparse
-import datetime
 
 from config import settings
 # from utils.qiniu_oss import make_full_url, upload
@@ -34,9 +33,9 @@ async def save_img(url: str, name: str):
             if resp.status != 200:
                 print('error: %s', resp.content)
 
-            localpath = Path(settings.STORAGE) / Path(name)
+            localpath = Path(settings.img_dir) / Path(name)
             if not localpath.parent.exists():
-                localpath.parent.mkdir()
+                localpath.parent.mkdir(parents=True)
             async with aiofiles.open(localpath, 'wb') as f:
                 content = await resp.content.read()
                 await f.write(content)

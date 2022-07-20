@@ -8,9 +8,14 @@ class Settings(BaseSettings):
     QINIU_HOST: AnyHttpUrl
     STORAGE: str = 'images'
     OUTDIR: str = 'output'
+    LOCAL: bool = False
 
     class Config:
         env_file = '.env'
+
+    @property
+    def img_dir(self):
+        return f'{self.OUTDIR}/tieba/images' if self.LOCAL else self.STORAGE
 
 
 settings = Settings()
