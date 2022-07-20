@@ -9,7 +9,9 @@ from zhtools.random import short_uuid
 from urllib.parse import urlparse
 import datetime
 
-from utils.qiniu_oss import make_full_url, upload
+from config import settings
+# from utils.qiniu_oss import make_full_url, upload
+from utils.github import make_full_url, upload
 
 
 def make_url(url: str, **query):
@@ -32,7 +34,7 @@ async def save_img(url: str, name: str):
             if resp.status != 200:
                 print('error: %s', resp.content)
 
-            localpath = Path('/tmp') / Path(name)
+            localpath = Path(settings.STORAGE) / Path(name)
             if not localpath.parent.exists():
                 localpath.parent.mkdir()
             async with aiofiles.open(localpath, 'wb') as f:

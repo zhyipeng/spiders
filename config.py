@@ -6,7 +6,8 @@ class Settings(BaseSettings):
     QINIU_SECRET_KEY: str
     QINIU_BUCKET: str
     QINIU_HOST: AnyHttpUrl
-    STORAGE: str = '/tmp'
+    STORAGE: str = 'images'
+    OUTDIR: str = 'output'
 
     class Config:
         env_file = '.env'

@@ -42,7 +42,7 @@ async def run(url: str, path: Path):
 
 
 async def run_batch(*url: str):
-    path = Path(settings.STORAGE) / Path('tieba')
+    path = Path(settings.OUTDIR) / Path('tieba')
     if not path.exists():
         path.mkdir(parents=True)
 
@@ -57,4 +57,4 @@ def tieba(url: list[str]):
 
 
 if __name__ == '__main__':
-    asyncio.run(run('https://tieba.baidu.com/p/7446831583?page=1', Path('./')))
+    asyncio.run(run('https://tieba.baidu.com/p/5588228348?see_lz=1', Path('./')))
